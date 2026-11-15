@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Ceapi: local travel help in Bucharest. Custom itineraries, day trips, walks around Bucharest and ask-a-local calls.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Ccircle cx='13' cy='13' r='11' fill='none' stroke='%230E6E8C' stroke-width='2.4'/%3E%3Cpath d='M13 2v22M2 13h22' stroke='%230E6E8C' stroke-width='1.6'/%3E%3C/svg%3E">
+<style>html{scroll-behavior:smooth}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>The Local Way</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Open+Sans:wght@400;600;700&display=swap">
+<style>
+/* Layout: photo-led travel magazine. Big photo up top with a price bar hanging off it, a mosaic of places, then plain talk. Dark only, by choice. */
+:root{
+  --bg:#121416; --card:#1B1E21; --ink:#F2F0EA; --muted:#A8ACB0; --line:#30353A;
+  --red:#E8415A; --blue:#2E63D6; --yellow:#FFC914; --green:#2BA36E;
+  --on-color:#FFFFFF; --on-yellow:#151515; --shade:rgba(10,12,14,.78);
+  --head:"Oswald", "Arial Narrow", Impact, sans-serif;
+  --body:"Open Sans", Arial, Helvetica, sans-serif;
+  color-scheme:dark;
+}
+html{background:#121416;scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6}
+.in{max-width:1120px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+a{color:var(--yellow)}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+h1,h2,h3{font-family:var(--head);margin:0;line-height:1.1;font-weight:700;text-transform:uppercase;letter-spacing:.01em;text-wrap:balance}
+h2{font-size:clamp(28px,4.4vw,40px)}
+h2::after{content:"";display:block;width:64px;height:5px;background:var(--red);margin-top:10px}
+h3{font-size:22px;font-weight:600}
+p{margin:0}
+figure{margin:0}
+section{padding-block:60px}
+.sub{color:var(--muted);margin-top:14px;max-width:44em}
+
+/* woven stripe */
+.stitch{height:18px;border-top:5px solid var(--blue);border-bottom:5px solid var(--yellow);box-sizing:content-box;background:
+  linear-gradient(135deg,var(--red) 25%,transparent 25%) -9px 0/18px 18px,
+  linear-gradient(225deg,var(--red) 25%,transparent 25%) -9px 0/18px 18px,
+  linear-gradient(315deg,var(--red) 25%,transparent 25%) 0 0/18px 18px,
+  linear-gradient(45deg,var(--red) 25%,transparent 25%) 0 0/18px 18px,
+  var(--bg)}
+
+/* top strip + nav */
+.top{background:var(--card);font-size:13.5px;color:var(--muted)}
+.top .in{display:flex;justify-content:space-between;gap:6px 18px;flex-wrap:wrap;padding-block:7px}
+.navbar{background:var(--blue)}
+.navbar .logo,.navbar nav a{color:var(--on-color)}
+.navbar nav{gap:8px}
+.navbar nav a{padding:7px 14px;border:2px solid rgba(255,255,255,.65);font-weight:600}
+.navbar nav a:hover{background:var(--on-color);color:var(--blue);border-color:var(--on-color)}
+.navbar nav a:last-child{background:var(--yellow);border-color:var(--yellow);color:var(--on-yellow)}
+.navbar nav a:last-child:hover{background:var(--on-color);border-color:var(--on-color)}
+.navbar .in{display:flex;justify-content:space-between;align-items:center;gap:10px 24px;flex-wrap:wrap;padding-block:16px}
+.logo{font-family:var(--head);font-weight:700;font-size:28px;text-transform:uppercase;color:var(--ink);text-decoration:none;letter-spacing:.02em}
+.logo b{color:var(--yellow);font-weight:700}
+nav{display:flex;gap:4px 22px;flex-wrap:wrap}
+nav a{font-family:var(--head);font-weight:500;font-size:17px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink);text-decoration:none;padding-block:4px;border-bottom:3px solid transparent}
+nav a:hover{border-color:var(--yellow)}
+
+/* hero */
+.hero{position:relative;padding:0;min-height:540px;display:flex;align-items:flex-end;background:var(--card)}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,12,14,.15) 0%,rgba(10,12,14,.35) 45%,rgba(10,12,14,.92) 100%)}
+.hero .in{position:relative;z-index:1;width:100%;padding-block:150px 96px}
+.kicker{display:inline-block;background:var(--red);color:var(--on-color);font-family:var(--head);font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:.08em;padding:4px 12px}
+h1{font-size:clamp(42px,7.4vw,84px);margin-top:14px;max-width:11em;color:var(--on-color)}
+h1 em{font-style:normal;color:var(--yellow)}
+.lead{font-size:19px;max-width:36em;margin-top:16px;color:var(--on-color)}
+.credit{position:absolute;right:max(16px, env(safe-area-inset-right, 0px));top:14px;z-index:1;font-size:12.5px;background:var(--shade);color:var(--on-color);padding:3px 9px}
+
+/* price bar hanging off the hero */
+.bar-wrap{position:relative;z-index:2;margin-top:-56px}
+.pricebar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--card);box-shadow:0 18px 40px -20px rgba(0,0,0,.8)}
+.pricebar a{display:flex;flex-direction:column;gap:2px;padding:18px 20px 16px;text-decoration:none;color:var(--ink);border-top:5px solid var(--red);border-right:1px solid var(--line);min-width:0}
+.pricebar a:nth-child(2){border-top-color:var(--blue)} .pricebar a:nth-child(3){border-top-color:var(--green)} .pricebar a:nth-child(4){border-top-color:var(--yellow);border-right:0}
+.pricebar span{font-family:var(--head);font-weight:600;font-size:19px;text-transform:uppercase;letter-spacing:.02em}
+.pricebar b{font-size:15px;font-weight:600;color:var(--muted)}
+.pricebar a:hover{background:var(--line)}
+
+/* hello */
+.hello .in{display:grid;grid-template-columns:150px 1fr;gap:28px;align-items:center}
+.hello .in > *{min-width:0}
+.hello img{display:block;width:150px;height:150px;object-fit:cover;object-position:center 18%;border:4px solid var(--yellow)}
+.hello p{font-size:19px;max-width:40em}
+.hello .aside{font-size:16px;color:var(--muted);margin-top:8px}
+
+/* services */
+.svc{margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{background:var(--card);padding:24px;display:flex;flex-direction:column;gap:10px;min-width:0;border-top:5px solid var(--blue)}
+.card:nth-child(3){border-top-color:var(--green)} .card:nth-child(4){border-top-color:var(--yellow)} .card:nth-child(5){border-top-color:var(--line)}
+.card.big{grid-column:1 / -1;display:grid;grid-template-columns:1.3fr 1fr;gap:0;padding:0;border-top-color:var(--red)}
+.card.big > div{padding:28px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.card.big img{display:block;width:100%;height:100%;min-height:260px;max-height:420px;object-fit:cover;object-position:center 62%}
+.card.big h3{font-size:30px}
+.cost{font-family:var(--head);font-weight:700;font-size:26px;color:var(--yellow);margin-top:auto}
+.cost + .cost{margin-top:0}
+.cost small{font-family:var(--body);font-size:14px;font-weight:600;color:var(--muted);margin-left:6px}
+.card .fine{font-size:15px;color:var(--muted)}
+.label{align-self:flex-start;background:var(--yellow);color:var(--on-yellow);font-family:var(--head);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.08em;padding:3px 10px}
+.side{margin-top:20px;color:var(--muted);font-size:15.5px}
+
+/* places mosaic */
+.mosaic{margin-top:30px;display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:210px;gap:10px}
+.tile{position:relative;overflow:hidden;background:var(--card);min-width:0}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.tile:hover img{transform:scale(1.05)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.tile img{transition:none}.tile:hover img{transform:none}}
+.tile figcaption{position:absolute;left:0;right:0;bottom:0;padding:44px 14px 12px;background:linear-gradient(180deg,transparent,rgba(10,12,14,.92));color:var(--on-color)}
+.tile b{display:block;font-family:var(--head);font-weight:600;font-size:22px;text-transform:uppercase;letter-spacing:.02em;line-height:1.1}
+.tile span{display:block;font-size:14px;line-height:1.35;margin-top:3px}
+.tile i{position:absolute;top:10px;left:10px;font-style:normal;font-family:var(--head);font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em;padding:2px 9px;background:var(--blue);color:var(--on-color)}
+.tile i.r{background:var(--red)} .tile i.g{background:var(--green)} .tile i.y{background:var(--yellow);color:var(--on-yellow)}
+.t-a{grid-column:span 2;grid-row:span 2} .t-b{grid-row:span 2} .t-w{grid-column:span 2}
+.t-a b{font-size:32px}
+
+/* guide */
+.guide{background:var(--blue);color:var(--on-color)}
+.guide .in{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.guide .in > *{min-width:0}
+.guide h2::after{background:var(--yellow)}
+.guide p{margin-top:14px;max-width:32em}
+.guide ul{list-style:none;margin:0;padding:0;font-weight:600}
+.guide li{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.35)}
+.guide li:last-child{border-bottom:0}
+.btn{display:inline-block;font-family:var(--head);font-weight:600;font-size:17px;text-transform:uppercase;letter-spacing:.05em;text-decoration:none;padding:12px 22px;background:var(--yellow);color:var(--on-yellow);margin-top:22px}
+.btn:hover{background:var(--on-color)}
+
+/* how */
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin:30px 0 0;padding:0;list-style:none}
+.how li{min-width:0;border-left:5px solid var(--red);padding-left:16px}
+.how li:nth-child(2){border-color:var(--blue)} .how li:nth-child(3){border-color:var(--green)}
+.how b{display:block;font-family:var(--head);font-size:20px;font-weight:600;text-transform:uppercase}
+.how p{margin-top:4px;color:var(--muted)}
+
+/* about */
+.about{background:var(--card)}
+.about .in{display:grid;grid-template-columns:320px 1fr;gap:44px;align-items:start}
+.about .in > *{min-width:0}
+.about img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center 30%}
+.about figcaption{font-size:13.5px;color:var(--muted);padding-top:6px}
+.about p{margin-top:16px;max-width:36em}
+.facts{margin:24px 0 0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.facts li{padding:12px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:130px 1fr;gap:14px}
+.facts b{font-family:var(--head);font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--yellow)}
+
+/* contact */
+.contact{background:var(--yellow);color:var(--on-yellow)}
+.contact .in{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
+.contact .in > *{min-width:0}
+.contact h2::after{background:var(--on-yellow)}
+.contact p{margin-top:14px;max-width:30em}
+.rows{background:var(--bg);color:var(--ink);padding:6px 22px}
+.crow{display:grid;grid-template-columns:96px 1fr auto;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.crow:last-child{border-bottom:0}
+.crow .k{font-family:var(--head);font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.crow .v{font-weight:600;overflow-wrap:anywhere;min-width:0}
+.copy{font:inherit;font-size:14px;font-weight:700;background:var(--ink);color:var(--bg);border:0;padding:6px 12px;cursor:pointer}
+
+/* footer */
+footer{padding-block:36px 26px;font-size:15px;color:var(--muted)}
+.fcols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px}
+.fcols > div{min-width:0}
+.fcols h4{font-family:var(--head);font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink);margin:0 0 8px}
+.fcols ul{list-style:none;margin:0;padding:0}
+.fcols li{padding:2px 0}
+.fcols a{color:var(--muted);text-decoration:none}
+.fcols a:hover{color:var(--yellow)}
+.legal{margin-top:24px;padding-top:14px;border-top:1px solid var(--line);font-size:13.5px}
+
+/* hero v2: me, big */
+.hero{position:static;min-height:0;display:block;background:none;padding-block:26px 56px}
+.hero::after{content:none}
+.hero .in{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center;padding-block:0;width:auto}
+.hero .in > *{min-width:0}
+h1{color:var(--ink);max-width:none}
+.lead{color:var(--ink)}
+.aside{font-size:15.5px;color:var(--muted);margin-top:10px}
+.me img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 20%}
+.frame{position:relative;padding:12px;border:3px solid var(--yellow);background:
+  linear-gradient(135deg,var(--red) 25%,transparent 25%) -6px 0/12px 12px,
+  linear-gradient(225deg,var(--red) 25%,transparent 25%) -6px 0/12px 12px,
+  linear-gradient(315deg,var(--red) 25%,transparent 25%) 0 0/12px 12px,
+  linear-gradient(45deg,var(--red) 25%,transparent 25%) 0 0/12px 12px,
+  var(--card)}
+.frame.blue{border-color:var(--blue)}
+.plate{position:absolute;left:0;bottom:30px;max-width:88%;background:var(--yellow);color:var(--on-yellow);padding:8px 18px 9px 16px;display:flex;flex-direction:column;line-height:1.2}
+.plate b{font-family:var(--head);font-weight:700;font-size:28px;text-transform:uppercase;letter-spacing:.02em}
+.plate span{font-size:14px;font-weight:600}
+.frame.blue .plate{background:var(--blue);color:var(--on-color)}
+.frame.blue .plate b{font-size:20px}
+.me figcaption{font-size:14px;color:var(--muted);padding-top:8px}
+.card.big{display:flex;padding:28px;gap:12px}
+/* small photo strip */
+.fun{padding-block:40px}
+.fun h3{font-size:20px}
+.strip{display:flex;gap:8px;overflow-x:auto;margin-top:14px;padding-bottom:8px}
+.strip figure{flex:0 0 124px;min-width:0}
+.strip img{display:block;width:124px;height:124px;object-fit:cover}
+.strip figcaption{font-size:13px;font-weight:600;line-height:1.3;padding-top:6px}
+.strip figcaption span{display:block;font-weight:400;color:var(--muted)}
+.foot{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:14px}
+@media (max-width:860px){
+  .hero{padding-block:16px 40px}
+  .hero .in{grid-template-columns:1fr;gap:26px}
+  .me{max-width:440px}
+}
+@media (max-width:520px){ .card.big{padding:20px} .strip figure{flex-basis:108px} .strip img{width:108px;height:108px} }
+
+@media (max-width:860px){
+  section{padding-block:44px}
+  .pricebar{grid-template-columns:1fr 1fr}
+  .pricebar a:nth-child(2){border-right:0}
+  .svc{grid-template-columns:1fr}
+  .card.big{grid-template-columns:1fr}
+  .card.big img{min-height:0;height:220px}
+  .mosaic{grid-template-columns:1fr 1fr;grid-auto-rows:170px;grid-auto-flow:dense}
+  .t-b{grid-row:span 1}
+  .guide .in,.contact .in,.about .in{grid-template-columns:1fr;gap:28px}
+  .about figure{max-width:280px}
+  .about .in > div{order:-1}
+  .how{grid-template-columns:1fr;gap:18px}
+  .fcols{grid-template-columns:1fr 1fr}
+}
+@media (max-width:520px){
+  body{font-size:16.5px}
+  .top .in span:last-child{display:none}
+  .logo{font-size:24px}
+  nav{width:100%}
+  .navbar nav{gap:6px}
+  .navbar nav a{font-size:14.5px;padding:6px 10px}
+  .lead{font-size:17px}
+  .pricebar a{padding:14px 14px 12px}
+  .pricebar span{font-size:16.5px}
+  .hello .in{grid-template-columns:96px 1fr;gap:16px;align-items:start}
+  .hello img{width:96px;height:96px}
+  .hello p{font-size:17px}
+  .card,.card.big > div{padding:20px}
+  .facts li{grid-template-columns:1fr;gap:2px}
+  .rows{padding:4px 16px}
+  .crow{grid-template-columns:1fr auto;gap:4px 12px}
+  .crow .k{grid-column:1 / -1}
+  .btn{display:block;text-align:center}
+  .fcols{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+
+<div class="stitch" aria-hidden="true"></div>
+
+<div class="top"><div class="in">
+  <span>English &amp; Romanian spoken</span>
+  <span>Replies within a day</span>
+</div></div>
+
+<header class="navbar"><div class="in">
+  <a class="logo" href="#top" id="top">The Local <b>Way</b></a>
+  <nav aria-label="Sections">
+    <a href="#services">What I offer</a>
+    <a href="#guide">The guide</a>
+    <a href="#about">About me</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</div></header>
+
+<section class="hero"><div class="in">
+  <div>
+    <span class="kicker">Bucharest, Romania</span>
+    <h1>New in Bucharest? <em>See it with a local.</em></h1>
+    <p class="lead">Hey, I'm Ceapi! I study tourism and I've lived in Bucharest my whole life, and helping visitors find their way around the city is something I really enjoy. If you need anything, I'm one message away.</p>
+    <p class="aside">My real name is Alex, but there are a million Alexes and only one Ceapi.</p>
+  </div>
+  <figure class="me">
+    <div class="frame">
+      <img src="img/me-kutna-hora.jpg" alt="Ceapi standing by a stone wall with a cathedral behind him, in Kutná Hora, Czechia" width="506" height="900">
+    </div>
+    <figcaption>Photo from a trip to Kutná Hora, Czechia.</figcaption>
+  </figure>
+</div></section>
+
+<section id="services" style="padding-top:20px"><div class="in">
+  <h2>What I offer</h2>
+  <p class="sub">I just started so prices are low, and you always know the price before we begin.</p>
+
+  <div class="svc">
+    <article class="card big">
+      <span class="label">The main thing</span>
+      <h3>A walk around Bucharest with me</h3>
+      <p>We walk the city together at your pace through the Old Town, the parks and the places most visitors miss, and I can take photos of you along the way if you want.</p>
+      <p class="fine">It's free because I'm not a licensed guide yet (I'm working on it), so I don't charge and I don't take tips, I just enjoy it and you get my full attention and good vibes.</p>
+      <span class="cost">Free</span>
+    </article>
+
+    <article class="card">
+      <h3>Local on call</h3>
+      <p>Message me any time during your trip, whether it's a weird taxi price, a cancelled train or no idea which bus to take, and I'll answer.</p>
+      <span class="cost">from €10<small>per trip</small></span>
+    </article>
+
+    <article class="card">
+      <h3>Ask me anything, 30 minute call</h3>
+      <p>A call before you come where you ask me about safety, money, where to stay and what to skip.</p>
+      <span class="cost">from €5</span>
+    </article>
+
+    <article class="card">
+      <h3>Written plans</h3>
+      <p>A plan for your days here or a day trip from Bucharest, with the trains to take written down for you.</p>
+      <span class="cost">from €2<small>trip plan</small></span>
+      <span class="cost" style="font-size:20px">from €5<small>day trip plan</small></span>
+    </article>
+
+    <article class="card">
+      <h3>Something else?</h3>
+      <p>If you need help with something that's not on this list, just ask me.</p>
+      <span class="cost" style="font-size:20px">Just ask</span>
+    </article>
+  </div>
+  <p class="side">I also build websites and Discord bots, starting from €10.</p>
+</div></section>
+
+<section id="guide" class="guide"><div class="in">
+  <div>
+    <span class="label">Not finished yet</span>
+    <h2 style="margin-top:12px">I'm writing a guide: Bucharest on a Budget</h2>
+    <p>Everything I'd tell a friend who's coming to Bucharest for the first time, all in one place.</p>
+    <a class="btn" href="#contact">Tell me when it's out</a>
+  </div>
+  <ul>
+    <li>Free and cheap things to do</li>
+    <li>Where locals eat</li>
+    <li>Metro and buses</li>
+    <li>Tourist traps</li>
+  </ul>
+</div></section>
+
+<section><div class="in">
+  <h2>How it works</h2>
+  <ol class="how">
+    <li><b>Write to me</b><p>On email or Instagram, whichever you use more.</p></li>
+    <li><b>We talk</b><p>We agree on the day and the place, and the price if it's a paid service.</p></li>
+    <li><b>We meet</b><p>Or I send you what you asked for and stay around if you need changes.</p></li>
+  </ol>
+</div></section>
+
+<section id="about" class="about"><div class="in">
+  <figure>
+    <div class="frame blue">
+      <img src="img/me-znojmo.jpg" alt="Ceapi with arms open on a stone wall above a river" width="506" height="900" loading="lazy">
+      <div class="plate"><b>A traveller too</b><span>I know what being new somewhere is like</span></div>
+    </div>
+    <figcaption>Znojmo, Czechia</figcaption>
+  </figure>
+  <div>
+    <h2>About me</h2>
+    <p>I've loved travelling for as long as I can remember and I like showing people around even more, so I made this site to do exactly that.</p>
+    <ul class="facts">
+      <li><b>Studies</b><span>Tourism at the Faculty of Geography, University of Bucharest</span></li>
+      <li><b>Certificate</b><span>Tourism Technician, Level 4, the highest level for this qualification in Romania</span></li>
+      <li><b>Languages</b><span>English and Romanian</span></li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="fun" id="places"><div class="in">
+  <h3>Just for fun: a few photos I took</h3>
+  <div class="strip">
+    <figure><img src="img/bran.jpg" alt="Bran Castle" width="507" height="900" loading="lazy"><figcaption>Bran Castle<span>Brașov County</span></figcaption></figure>
+    <figure><img src="img/shipwreck.jpg" alt="Shipwreck in the Black Sea" width="900" height="506" loading="lazy"><figcaption>Evangelia shipwreck<span>Costinești</span></figcaption></figure>
+    <figure><img src="img/peles.jpg" alt="Peleș Castle" width="505" height="900" loading="lazy"><figcaption>Peleș Castle<span>Sinaia</span></figcaption></figure>
+    <figure><img src="img/decebal.jpg" alt="Rock sculpture of Decebalus on the Danube" width="505" height="900" loading="lazy"><figcaption>Decebalus Rex<span>Danube Gorge</span></figcaption></figure>
+    <figure><img src="img/parliament.jpg" alt="Palace of the Parliament at night" width="505" height="900" loading="lazy"><figcaption>Palace of the Parliament<span>Bucharest</span></figcaption></figure>
+    <figure><img src="img/council-square.jpg" alt="Council Square in Brașov" width="505" height="900" loading="lazy"><figcaption>Council Square<span>Brașov</span></figcaption></figure>
+    <figure><img src="img/casino-constanta.jpg" alt="The Casino in Constanța" width="506" height="900" loading="lazy"><figcaption>Casino<span>Constanța</span></figcaption></figure>
+    <figure><img src="img/black-church.jpg" alt="The Black Church in Brașov" width="505" height="900" loading="lazy"><figcaption>Black Church<span>Brașov</span></figcaption></figure>
+    <figure><img src="img/cazane.jpg" alt="Cliffs above the Danube" width="505" height="900" loading="lazy"><figcaption>Cazanele Dunării<span>Danube Gorge</span></figcaption></figure>
+    <figure><img src="img/beach.jpg" alt="Black Sea beach" width="900" height="506" loading="lazy"><figcaption>Black Sea beach<span>Romanian coast</span></figcaption></figure>
+  </div>
+</div></section>
+
+<section id="contact" class="contact"><div class="in">
+  <div>
+    <h2>Write to me</h2>
+    <p>Send me a message even if you're just curious, I usually answer within a day.</p>
+  </div>
+  <div class="rows">
+    <div class="crow"><span class="k">Email</span><span class="v" id="email">GiurcanAP@gmail.com</span><button class="copy" type="button" data-copy="email">Copy</button></div>
+    <div class="crow"><span class="k">Instagram</span><span class="v" id="insta">@ceapi_</span><button class="copy" type="button" data-copy="insta">Copy</button></div>
+  </div>
+</div></section>
+
+<div class="stitch" aria-hidden="true"></div>
+<footer><div class="in foot">
+  <span>The Local Way · made in Bucharest by Ceapi</span>
+  <span>© 2026</span>
+</div></footer>
+
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click', function(){
+    var el = document.getElementById(b.dataset.copy);
+    var text = el.textContent.trim();
+    var done = function(){ b.textContent='Copied'; setTimeout(function(){ b.textContent='Copy'; },1600); };
+    var fallback = function(){ var r=document.createRange(); r.selectNodeContents(el); var s=getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent='Selected'; };
+    try { navigator.clipboard.writeText(text).then(done, fallback); } catch(e){ fallback(); }
+  });
+});
+</script>
+
+</body>
+</html>
