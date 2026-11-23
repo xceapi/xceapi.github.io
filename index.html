@@ -8,7 +8,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://xceapi.github.io/">
 <meta property="og:title" content="The Local Way">
-<meta property="og:description" content="New in Bucharest? See it with a local. Free walks around the city and help during your trip.">
+<meta property="og:description" content="See Bucharest through a local's eyes. Free walks around the city and help during your trip.">
 <meta property="og:image" content="https://xceapi.github.io/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -22,12 +22,18 @@
   color-scheme:dark;
 }
 *{box-sizing:border-box}
-html{background:var(--bg)}
-body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.65 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+html{background:#111214}
+body{margin:0;background-color:#111214;background-image:
+  linear-gradient(45deg,rgba(217,64,79,.06) 25%,transparent 25%,transparent 75%,rgba(217,64,79,.06) 75%),
+  linear-gradient(45deg,rgba(58,100,200,.06) 25%,transparent 25%,transparent 75%,rgba(58,100,200,.06) 75%);
+  background-size:30px 30px;background-position:0 0,15px 15px;color:var(--ink);font:18px/1.65 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 a{color:var(--link);text-underline-offset:3px}
 a:hover{text-decoration-thickness:2px}
 :focus-visible{outline:2px solid var(--link);outline-offset:3px}
 img{max-width:100%;display:block}
+.sheet{max-width:980px;margin:0 auto;background:var(--bg);border-left:1px solid var(--line);border-right:1px solid var(--line);box-shadow:0 0 60px rgba(0,0,0,.45)}
+.h1-note{display:block;font-size:.5em;font-weight:400;color:var(--muted);margin-top:6px}
+@media (max-width:1000px){.sheet{border:0;box-shadow:none}}
 h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:700;line-height:1.2;margin:0}
 h1{font-size:clamp(34px,6vw,50px)}
 h2{font-size:30px;margin-bottom:14px}
@@ -102,6 +108,7 @@ footer .wrap{padding-top:22px;padding-bottom:30px;color:var(--muted);font-size:1
 </head>
 <body>
 <div class="stripe" aria-hidden="true"></div>
+<div class="sheet">
 
 <header><div class="wrap">
   <a class="name" href="#top" id="top">The Local Way</a>
@@ -115,7 +122,7 @@ footer .wrap{padding-top:22px;padding-bottom:30px;color:var(--muted);font-size:1
 <main>
 <section class="intro"><div class="wrap">
   <div>
-    <h1>New in Bucharest? See it with a local.</h1>
+    <h1>See Bucharest through my eyes! <span class="h1-note">(a local's)</span></h1>
     <p class="hi">Hey, I'm Ceapi! I study tourism and I've lived in Bucharest my whole life, and helping visitors find their way around the city is something I really enjoy. If you need anything, I'm one message away.</p>
     <p class="small">My real name is Alex, but there are a million Alexes and only one Ceapi.</p>
   </div>
@@ -165,10 +172,10 @@ footer .wrap{padding-top:22px;padding-bottom:30px;color:var(--muted);font-size:1
   </figure>
   <div>
     <h2>About me</h2>
-    <p>I've loved travelling since I was a kid. Some of my first memories in Bucharest are going to Obor market with my parents to eat mici and buy cheap clothes, and I still go back there.</p>
+    <p>I've loved travelling since I was a kid, and showing people around my city is the part I enjoy most.</p>
     <p>Now I study Tourism at the Faculty of Geography (University of Bucharest), and I have a Level 4 Tourism Technician certificate, the highest level for that qualification here. I speak English and Romanian.</p>
     <p>I travel a lot myself too, so I know how it feels to land somewhere new and have no idea where anything is. That's pretty much why I started this.</p>
-    <p>When I'm not doing any of this I'm probably fishing (still a beginner), watching football, or at some electronic music night in the city, so if you want club tips, ask.</p>
+    <p>When I'm not doing any of this I'm usually out for a walk at night, at the gym, or doing some calisthenics in the park. I also go to electronic music nights sometimes, so if you want club tips, ask.</p>
   </div>
 </div></section>
 
@@ -200,6 +207,7 @@ footer .wrap{padding-top:22px;padding-bottom:30px;color:var(--muted);font-size:1
 </main>
 
 <footer><div class="wrap">The Local Way, made in Bucharest by Ceapi · 2026</div></footer>
+</div>
 
 <script>
 document.querySelectorAll('.copy').forEach(function(b){
